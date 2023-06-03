@@ -1,18 +1,15 @@
-import HomeView from './views/HomeView.vue'
+import MovieIndex from './views/MovieIndex.vue'
 
 const router = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'movie.index',
+    component: MovieIndex
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('./views/AboutView.vue')
+    path: '/movie/:id/:slug',
+    name: 'movie.detail',
+    component: () => import('./views/MovieDetails.vue')
   }
 ]
 
