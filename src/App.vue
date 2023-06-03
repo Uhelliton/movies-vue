@@ -5,7 +5,7 @@ import SystemLayout from '@/presentation/layouts/System.vue'
 export default defineComponent({
   name: 'App',
   components: {
-    SystemLayout,
+    SystemLayout
   }
 })
 </script>
