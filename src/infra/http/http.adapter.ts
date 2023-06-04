@@ -8,8 +8,7 @@ http = axios.create({
 
 http.interceptors.request.use(
   (config: any) => {
-    config.headers.Authorization = `Bearer `
-
+    config.headers.Authorization = `Bearer ${import.meta.env.VITE_MOVIE_API_TOKEN}`
     return config
   },
   (error: any) => {
@@ -22,10 +21,6 @@ http.interceptors.response.use(
     return response
   },
   (error: any) => {
-    if (error.response?.status === 401) {
-      // window.location.href = '/';
-    }
-
     return Promise.reject(error)
   }
 )
