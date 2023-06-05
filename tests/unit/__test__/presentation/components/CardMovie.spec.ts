@@ -10,6 +10,8 @@ describe('CardMovie', () => {
         id: 18020,
         title: 'Duna',
         description: 'Duna é um filme',
+        thumb: 'fgw4rFs4XMWdJTWp1eMacHKQqbZ.jpg',
+        releaseDate: '2023-06-03',
       }
     })
 
@@ -28,7 +30,8 @@ describe('CardMovie', () => {
 
     expect(wrapper.props().id).toBe(18020)
     expect(wrapper.text()).toContain('Duna')
-    expect(wrapper.text()).toContain('Duna é um filme')
+    expect(wrapper.props().thumb).toBe('fgw4rFs4XMWdJTWp1eMacHKQqbZ.jpg')
+    expect(wrapper.text()).toContain('2023-06-03')
   })
 
 })

@@ -7,7 +7,12 @@ const router = [
     component: MovieIndex
   },
   {
-    path: '/filmes/:id',
+    path: '/pesquisa',
+    name: 'movie.search',
+    component: () => import('./views/MovieSearch.vue')
+  },
+  {
+    path: '/filme/:id',
     name: 'movie.detail',
     component: () => import('./views/MovieDetails.vue')
   }
