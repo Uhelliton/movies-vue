@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import Nav from '@/presentation/components/layouts/Nav.vue'
-import Header from '@/presentation/components/layouts/Header.vue'
+import Nav from '../../presentation/components/layouts/Nav.vue'
+import Header from '../../presentation/components/layouts/Header.vue'
 
 export default defineComponent({
   name: 'SystemLayout',

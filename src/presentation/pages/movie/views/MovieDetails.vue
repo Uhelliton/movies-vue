@@ -3,8 +3,8 @@ import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import ShimmerDetails from '../components/ShimmerDetails.vue'
-import { MovieService } from '@/domains/movie/services/movie.services'
-import { MovieContract } from '@/domains/movie/contracts/movie.contract'
+import { MovieService } from '../../../../domains/movie/services/movie.services'
+import type { MovieContract } from '../../../../domains/movie/contracts/movie.contract'
 
 export default defineComponent({
   name: 'MovieDetails',
@@ -13,7 +13,7 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const loading = ref<boolean>(true)
-    const movie = ref<MovieContract>()
+    const movie = ref<MovieContract>({} as MovieContract)
 
     onMounted(async () => {
       const movieId = Number(route.params.id)
@@ -25,7 +25,7 @@ export default defineComponent({
     })
 
     const genres = computed((): string => {
-      const categories = movie.value.genres.map(({ name }) => name)
+      const categories = movie.value?.genres?.map(({ name }) => name) || []
       return categories.join(', ')
     })
 
@@ -58,6 +58,6 @@ export default defineComponent({
         </div>
       </div>
     </div>
-    <ShimmerDetails v-else class="container px-5 py-24 mx-auto"/>
+    <ShimmerDetails v-else class="container px-5 py-24 mx-auto" />
   </section>
 </template>

@@ -1,4 +1,4 @@
-import { IHttpService } from '../../../infra/http/http-client'
+import type { IHttpService } from '../../../infra/http/http-client'
 
 interface MovieGenre {
   id: number

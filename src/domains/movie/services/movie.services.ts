@@ -1,4 +1,4 @@
-import { HttpClient } from '@/infra/http/http-client'
+import { HttpClient } from '../../../infra/http/http-client'
 
 class MovieHttpClient extends HttpClient {
   protected endpoint = '/movie'

@@ -1,8 +1,8 @@
 <script lang="ts">
-import { defineComponent, ref, watch, onMounted } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 
-import CardMovie from '@/presentation/components/cards/CardMovie.vue'
-import { MovieContract } from '../../../../domains/movie/contracts/movie.contract'
+import CardMovie from '../../../../presentation/components/cards/CardMovie.vue'
+import type { MovieContract } from '../../../../domains/movie/contracts/movie.contract'
 import { useMovieStore } from '../../../../domains/movie/stores/movie.store'
 import { useRouter } from 'vue-router'
 
@@ -14,19 +14,16 @@ export default defineComponent({
 
   setup() {
     const router = useRouter()
-    const movieStore = useMovieStore()
+    const { $state } = useMovieStore()
     const search = ref<string>('')
     const tab = ref<string>('popular')
     const tabMovies = ref<Array<MovieContract>>([])
 
-    onMounted(() => {
-      tabMovies.value = movieStore.popular
-    })
-
-    watch(() => tab.value,
+    watch(
+      () => tab.value,
       (value) => {
-        if (value === 'popular') tabMovies.value = movieStore.popular
-        else if (value === 'tendencies') tabMovies.value = movieStore.tendencies
+        if (value === 'popular') tabMovies.value = $state.popular
+        else if (value === 'tendencies') tabMovies.value = $state.tendencies
       }
     )
 
@@ -38,7 +35,6 @@ export default defineComponent({
       search,
       tab,
       tabMovies,
-      movieStore,
       handleSearch
     }
   }
@@ -53,12 +49,7 @@ export default defineComponent({
           <legend>Milhões de Filmes, Séries e Pessoas para Descobrir. Explore já.</legend>
         </fieldset>
         <div class="flex items-center">
-          <input
-            type="text"
-            v-model="search"
-            class="w-full rounded-lg border border-gray-400 p-2"
-            placeholder="Buscar por um Filme, Série ou Pessoa..."
-          />
+          <input type="text" v-model="search" class="w-full rounded-lg border border-gray-400 p-2" placeholder="Buscar por um Filme, Série ou Pessoa..." />
           <button type="button" @click="handleSearch" class="ml-2 rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-600">Pesquisar</button>
         </div>
       </form>

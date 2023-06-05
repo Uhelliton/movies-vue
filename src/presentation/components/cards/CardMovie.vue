@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 
-import { strLimit } from '@/infra/utils/helpers'
+import { strLimit } from '../../../infra/utils/helpers'
 
 export default defineComponent({
   name: 'CardMovie',
@@ -15,7 +15,8 @@ export default defineComponent({
       required: true
     },
     description: {
-      type: String
+      type: String,
+      default: () => ''
     },
     thumb: {
       type: String

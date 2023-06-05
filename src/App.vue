@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import SystemLayout from '@/presentation/layouts/System.vue'
+import SystemLayout from './presentation/layouts/System.vue'
 
 export default defineComponent({
   name: 'App',
