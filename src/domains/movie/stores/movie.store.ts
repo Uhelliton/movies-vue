@@ -3,18 +3,9 @@ import { defineStore } from 'pinia'
 import type { MovieContract } from '../contracts/movie.contract'
 import { MovieService } from '../services/movie.services'
 
-export interface MovieStoreContract {
-  popular: Array<MovieContract>
-  tendencies: Array<MovieContract>
-}
-
 export const useMovieStore = defineStore('movie', () => {
   const popular = ref<Array<MovieContract>>([])
   const tendencies = ref<Array<MovieContract>>([])
-
-  const populars = computed(() => {
-    return popular.value
-  })
 
   onMounted(async () => {
     await fetchPopularMovies()
