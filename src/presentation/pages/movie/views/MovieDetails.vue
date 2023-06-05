@@ -5,12 +5,14 @@ import { useRoute } from 'vue-router'
 import ShimmerDetails from '../components/ShimmerDetails.vue'
 import { MovieService } from '../../../../domains/movie/services/movie.services'
 import type { MovieContract } from '../../../../domains/movie/contracts/movie.contract'
+import useDate from '../../../../infra/composables/date'
 
 export default defineComponent({
   name: 'MovieDetails',
   components: { ShimmerDetails },
 
   setup() {
+    const { formatDate } = useDate()
     const route = useRoute()
     const loading = ref<boolean>(true)
     const movie = ref<MovieContract>({} as MovieContract)
@@ -39,7 +41,8 @@ export default defineComponent({
       movie,
       genres,
       thumbUrl,
-      loading
+      loading,
+      formatDate
     }
   }
 })
@@ -53,7 +56,7 @@ export default defineComponent({
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
           <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ movie.title }}</h2>
           <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ movie.title }}</h1>
-          <h3 class="leading-relaxed py-2">{{ movie.release_date }} | {{ genres }}</h3>
+          <h3 class="leading-relaxed py-2">{{ formatDate(movie.release_date, 'dd-MM-yyyy') }} | {{ genres }}</h3>
           <p class="leading-relaxed">{{ movie.overview }}</p>
         </div>
       </div>
