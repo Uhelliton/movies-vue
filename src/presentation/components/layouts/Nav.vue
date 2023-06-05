@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
-          <div class="flex-shrink-0" @click="() => $router.push({ name: 'movie.index' })">
+          <div class="flex-shrink-0 cursor-pointer" @click="() => $router.push({ name: 'movie.index' })">
             <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
           </div>
           <div class="hidden md:block">
@@ -12,7 +12,7 @@
               <a
                 href="javascript:"
                 @click="() => $router.push({ name: 'movie.index' })"
-                class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
                 aria-current="page"
                 >Filmes</a
               >
@@ -30,7 +30,7 @@
                   aria-expanded="false"
                   aria-haspopup="true"
                 >
-                  <span class="sr-only">Open user menu</span>
+                  <span class="sr-only">Open menu</span>
                   <img
                     class="h-8 w-8 rounded-full"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"

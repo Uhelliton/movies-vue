@@ -1,41 +1,51 @@
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-import CardMovie from '../../../../presentation/components/cards/CardMovie.vue'
+import { Alert, CardMovie, CardMovieShimmer } from '../../../../presentation/components/index'
+import MovieTab, { HomeTabType } from '../components/MovieTab.vue'
 import type { MovieContract } from '../../../../domains/movie/contracts/movie.contract'
 import { useMovieStore } from '../../../../domains/movie/stores/movie.store'
-import { useRouter } from 'vue-router'
+import { useDelay } from '../../../../infra/composables/timeout'
 
 export default defineComponent({
   name: 'MovieIndex',
   components: {
-    CardMovie
+    CardMovie,
+    CardMovieShimmer,
+    Alert,
+    MovieTab
   },
 
   setup() {
     const router = useRouter()
-    const { $state } = useMovieStore()
+    const movieStore = useMovieStore()
     const search = ref<string>('')
-    const tab = ref<string>('popular')
+    const loading = ref<boolean>(true)
     const tabMovies = ref<Array<MovieContract>>([])
 
-    watch(
-      () => tab.value,
-      (value) => {
-        if (value === 'popular') tabMovies.value = $state.popular
-        else if (value === 'tendencies') tabMovies.value = $state.tendencies
-      }
-    )
+    onMounted(async () => {
+      await useDelay()
+
+      tabMovies.value = movieStore.tendencies
+      loading.value = false
+    })
 
     const handleSearch = () => {
       router.push({ name: 'movie.search', query: { query: search.value } })
     }
 
+    const handleTabChange = (tab: string) => {
+      tab === HomeTabType.Popular ? (tabMovies.value = movieStore.popular) : (tabMovies.value = movieStore.tendencies)
+    }
+
     return {
       search,
-      tab,
       tabMovies,
-      handleSearch
+      handleSearch,
+      handleTabChange,
+      loading,
+      movieStore
     }
   }
 })
@@ -54,31 +64,9 @@ export default defineComponent({
         </div>
       </form>
     </div>
-
+    <MovieTab @tabChange="handleTabChange" />
     <section class="py-4">
-      <ul class="list-reset flex border-b mt-4">
-        <li class="-mb-px mr-1">
-          <a
-            class="bg-white inline-block py-2 px-4 text-blue-dark font-semibold"
-            :class="[{ 'border-l border-t border-r rounded-t': tab === 'popular' }]"
-            href="javascript:"
-            @click="tab = 'popular'"
-          >
-            Tendências
-          </a>
-        </li>
-        <li class="-mb-px mr-1">
-          <a
-            class="bg-white inline-block py-2 px-4 text-blue hover:text-blue-darker font-semibold"
-            :class="[{ 'border-l border-t border-r rounded-t': tab === 'tendencies' }]"
-            href="javascript:"
-            @click="tab = 'tendencies'"
-          >
-            Os Mais Populares
-          </a>
-        </li>
-      </ul>
-
+      <Alert v-if="movieStore.requestError?.message" class="mt-4" :message="movieStore.requestError.message" />
       <div class="mt-4 grid grid-cols-2 sm:grid-cols-6 gap-4">
         <CardMovie
           v-for="movie in tabMovies"
@@ -90,6 +78,11 @@ export default defineComponent({
           :thumb="movie.poster_path"
         />
       </div>
+      <template v-if="loading">
+        <section class="mt-4 grid grid-cols-2 sm:grid-cols-6 gap-4">
+          <CardMovieShimmer v-for="index in [...Array(6)]" :key="index" />
+        </section>
+      </template>
     </section>
   </main>
 </template>
