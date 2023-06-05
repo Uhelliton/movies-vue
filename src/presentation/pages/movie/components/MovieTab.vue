@@ -1,0 +1,59 @@
+<script lang="ts">
+import { defineComponent, reactive, ref, watch } from 'vue'
+
+interface Tab {
+  id: string
+  name: string
+}
+
+export enum HomeTabType {
+  Popular = 'popular',
+  Tendency = 'tendencies'
+}
+
+export default defineComponent({
+  name: 'MovieTab',
+  emits: ['on-change'],
+
+  setup(props, { emit }) {
+    const tabSelect = ref<string>(HomeTabType.Tendency)
+    const tabItems = reactive<Array<Tab>>([
+      {
+        id: HomeTabType.Tendency,
+        name: 'Tendências'
+      },
+      {
+        id: HomeTabType.Popular,
+        name: ' Os Mais Populares'
+      }
+    ])
+
+    watch(
+      () => tabSelect.value,
+      (value) => {
+        emit('tab-change', value)
+      }
+    )
+
+    return {
+      tabSelect,
+      tabItems
+    }
+  }
+})
+</script>
+
+<template>
+  <ul class="list-reset flex border-b mt-4">
+    <li v-for="tab in tabItems" :key="tab.id" class="-mb-px mr-1">
+      <a
+        class="bg-white inline-block py-2 px-4 text-blue-dark font-semibold"
+        :class="[{ 'border-l border-t border-r rounded-t': tabSelect === tab.id }]"
+        href="javascript:"
+        @click="tabSelect = tab.id"
+      >
+        {{ tab.name }}
+      </a>
+    </li>
+  </ul>
+</template>
