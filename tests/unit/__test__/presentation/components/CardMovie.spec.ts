@@ -31,7 +31,7 @@ describe('CardMovie', () => {
     expect(wrapper.props().id).toBe(18020)
     expect(wrapper.text()).toContain('Duna')
     expect(wrapper.props().thumb).toBe('fgw4rFs4XMWdJTWp1eMacHKQqbZ.jpg')
-    expect(wrapper.text()).toContain('2023-06-03')
+    expect(wrapper.text()).toContain('03-06-2023')
   })
 
 })

@@ -66,7 +66,7 @@ export default defineComponent({
     </div>
     <MovieTab @tabChange="handleTabChange" />
     <section class="py-4">
-      <Alert v-if="movieStore.requestError?.message" class="mt-4" :message="movieStore.requestError.message" />
+      <Alert v-if="movieStore.requestError?.message" type="error" class="mt-4" :message="movieStore.requestError.message" />
       <div class="mt-4 grid grid-cols-2 sm:grid-cols-6 gap-4">
         <CardMovie
           v-for="movie in tabMovies"
