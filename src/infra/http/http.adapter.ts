@@ -3,7 +3,7 @@ import axios from 'axios'
 export let http: any
 
 http = axios.create({
-  baseURL: 'https://api.themoviedb.org/3'
+  baseURL: import.meta.env.VITE_API_URL
 })
 
 http.interceptors.request.use(
