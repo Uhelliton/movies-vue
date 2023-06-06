@@ -1,52 +1,55 @@
-# movies
 
-This template should help get you started developing with Vue 3 in Vite.
+## Movie Vue 3
+**Preview:**
+https://movies-vue-opal.vercel.app
 
-## Recommended IDE Setup
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/badge/node--lts-18-brightgreen" alt="Node Version" /></a>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### ⏳ Ponto de partida
 
-## Type Support for `.vue` Imports in TS
+Configure o arquivo `.env` na raiz do projeto, ou use como base `.env.development`
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+**Node:**
+- NodeJS 14.x
+- NPM >= 7.x
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+### 🛠️ Desenvolvimento
+**Docker:**
+```bash
+$ docker-compose up -d
 
-## Customize configuration
+# Instale as dependências necessárias para funcionamento.
+$ docker exec -it movies-vue sh
+$ npm install
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+$ npm run dev -- --host
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+### 🎉 Code Format
+```bash
+# formatar código
+$ npm run format
 ```
 
-### Type-Check, Compile and Minify for Production
 
-```sh
-npm run build
+### Test
+
+```bash
+# unit tests
+$ npm run test:unit
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### 🛠 Tecnologias
 
-```sh
-npm run test:unit
-```
+As seguintes ferramentas foram usadas na construção do projeto:
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- [Vue.js](https://vuejs.org)
+- [Pinia](https://pinia.vuejs.org)
+- [Vue Test Utils](https://test-utils.vuejs.org/)
+- [Vitest](https://vitest.dev/)
+- [Tailwind](https://tailwindcss.com/)
+- [Eslint](https://eslint.org/)
