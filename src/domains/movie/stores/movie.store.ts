@@ -6,7 +6,7 @@ import { MovieService } from '../services/movie.services'
 export const useMovieStore = defineStore('movie', () => {
   const popular = ref<Array<MovieContract>>([])
   const tendencies = ref<Array<MovieContract>>([])
-  const requestError = ref<string>('')
+  const requestError = ref<any>({})
 
   onMounted(async () => {
     await fetchPopularMovies()

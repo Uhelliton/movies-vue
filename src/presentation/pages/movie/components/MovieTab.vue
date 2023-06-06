@@ -13,7 +13,7 @@ export enum HomeTabType {
 
 export default defineComponent({
   name: 'MovieTab',
-  emits: ['on-change'],
+  emits: ['on-change'] as Array<any>,
 
   setup(props, { emit }) {
     const tabSelect = ref<string>(HomeTabType.Tendency)
