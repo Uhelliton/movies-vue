@@ -56,7 +56,7 @@ export default defineComponent({
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
           <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ movie.title }}</h2>
           <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ movie.title }}</h1>
-          <h3 class="leading-relaxed py-2">{{ formatDate(movie.release_date, 'dd-MM-yyyy') }} | {{ genres }}</h3>
+          <h3 class="leading-relaxed py-2">{{ formatDate(movie.release_date, 'dd/MM/yyyy') }} | {{ genres }}</h3>
           <p class="leading-relaxed">{{ movie.overview }}</p>
         </div>
       </div>
