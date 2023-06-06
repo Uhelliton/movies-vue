@@ -18,7 +18,7 @@ export default defineComponent({
     const movie = ref<MovieContract>({} as MovieContract)
 
     onMounted(async () => {
-      const movieId = Number(route.params.id)
+      const movieId = Number(route.params?.id)
       await fetchMovieById(movieId)
     })
 

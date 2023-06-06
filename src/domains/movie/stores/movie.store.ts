@@ -43,5 +43,5 @@ export const useMovieStore = defineStore('movie', () => {
     }
   }
 
-  return { popular, tendencies, requestError, fetchMovies }
+  return { popular, tendencies, requestError, fetchPopularMovies, fetchTendenciesMovies, fetchMovies }
 })
