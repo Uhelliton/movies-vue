@@ -2,11 +2,10 @@
 import { defineComponent } from 'vue'
 
 import Nav from '../../presentation/components/layouts/Nav.vue'
-import Header from '../../presentation/components/layouts/Header.vue'
 
 export default defineComponent({
   name: 'SystemLayout',
-  components: { Nav, Header }
+  components: { Nav }
 })
 </script>
 
