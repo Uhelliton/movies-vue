@@ -22,7 +22,7 @@ export default defineComponent({
   setup(props) {
     const { message } = toRefs(props)
     const styleComputed = computed((): string => {
-      return (props.type === AlertType.Success) ? 'bg-green-100 text-green-700' : 'bg-red-100 border-red-400 text-red-700'
+      return props.type === AlertType.Success ? 'bg-green-100 text-green-700' : 'bg-red-100 border-red-400 text-red-700'
     })
 
     return {

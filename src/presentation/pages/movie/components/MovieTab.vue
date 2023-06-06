@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, watch } from 'vue'
+import { useMovieStore } from '../../../../domains/movie/stores/movie.store'
 
 interface Tab {
   id: string
@@ -13,9 +14,9 @@ export enum HomeTabType {
 
 export default defineComponent({
   name: 'MovieTab',
-  emits: ['on-change'] as Array<any>,
 
-  setup(props, { emit }) {
+  setup() {
+    const movieStore = useMovieStore()
     const tabSelect = ref<string>(HomeTabType.Tendency)
     const tabItems = reactive<Array<Tab>>([
       {
@@ -31,7 +32,7 @@ export default defineComponent({
     watch(
       () => tabSelect.value,
       (value) => {
-        emit('tab-change', value)
+        movieStore.changeTabMovies(value)
       }
     )
 

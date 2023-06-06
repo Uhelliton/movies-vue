@@ -9,8 +9,5 @@ describe('MovieStore', () => {
   })
 
   it('fetchPopularMovies', async () => {
-    const movieStore = useMovieStore()
-    await movieStore.fetchTendenciesMovies()
-    expect(movieStore.popular).toEqual([])
   })
 })

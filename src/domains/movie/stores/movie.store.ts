@@ -2,8 +2,10 @@ import { onMounted, ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { MovieContract } from '../contracts/movie.contract'
 import { MovieService } from '../services/movie.services'
+import { HomeTabType } from '../../../presentation/pages/movie/components/MovieTab.vue'
 
 export const useMovieStore = defineStore('movie', () => {
+  const tabMovies = ref<Array<MovieContract>>([])
   const popular = ref<Array<MovieContract>>([])
   const tendencies = ref<Array<MovieContract>>([])
   const requestError = ref<any>({})
@@ -28,6 +30,7 @@ export const useMovieStore = defineStore('movie', () => {
       const response = await MovieService.getTendencies()
       const { results } = response.data
       tendencies.value = results
+      tabMovies.value = results
     } catch (error) {
       requestError.value = error
     }
@@ -43,5 +46,9 @@ export const useMovieStore = defineStore('movie', () => {
     }
   }
 
-  return { popular, tendencies, requestError, fetchPopularMovies, fetchTendenciesMovies, fetchMovies }
+  async function changeTabMovies(tabType: string) {
+    tabType === HomeTabType.Popular ? (tabMovies.value = popular.value) : (tabMovies.value = tendencies.value)
+  }
+
+  return { popular, tendencies, tabMovies, requestError, changeTabMovies, fetchMovies }
 })

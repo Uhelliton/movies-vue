@@ -3,8 +3,7 @@ import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { Alert, CardMovie, CardMovieShimmer } from '../../../../presentation/components/index'
-import MovieTab, { HomeTabType } from '../components/MovieTab.vue'
-import type { MovieContract } from '../../../../domains/movie/contracts/movie.contract'
+import MovieTab from '../components/MovieTab.vue'
 import { useMovieStore } from '../../../../domains/movie/stores/movie.store'
 import { useDelay } from '../../../../infra/composables/timeout'
 
@@ -22,12 +21,9 @@ export default defineComponent({
     const movieStore = useMovieStore()
     const search = ref<string>('')
     const loading = ref<boolean>(true)
-    const tabMovies = ref<Array<MovieContract>>([])
 
     onMounted(async () => {
       await useDelay()
-
-      tabMovies.value = movieStore.tendencies
       loading.value = false
     })
 
@@ -35,15 +31,9 @@ export default defineComponent({
       router.push({ name: 'movie.search', query: { query: search.value } })
     }
 
-    const handleTabChange = (tab: string) => {
-      tab === HomeTabType.Popular ? (tabMovies.value = movieStore.popular) : (tabMovies.value = movieStore.tendencies)
-    }
-
     return {
       search,
-      tabMovies,
       handleSearch,
-      handleTabChange,
       loading,
       movieStore
     }
@@ -64,12 +54,12 @@ export default defineComponent({
         </div>
       </form>
     </div>
-    <MovieTab @tabChange="handleTabChange" />
+    <MovieTab />
     <section class="py-4">
       <Alert v-if="movieStore.requestError?.message" type="error" class="mt-4" :message="movieStore.requestError.message" />
       <div class="mt-4 grid grid-cols-2 sm:grid-cols-6 gap-4">
         <CardMovie
-          v-for="movie in tabMovies"
+          v-for="movie in movieStore.tabMovies"
           :key="movie.id"
           :id="movie.id"
           :title="movie.title"
