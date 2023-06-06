@@ -8,6 +8,7 @@ describe('Alert', () => {
     const wrapper = mount(Alert,  {
       props: {
         message: 'error request message',
+        type: 'error',
       }
     })
 
@@ -26,6 +27,8 @@ describe('Alert', () => {
 
     expect(wrapper.props().message).toBe('error request message')
     expect(wrapper.text()).toContain('error request message')
+
+    expect(wrapper.props().type).toBe('error')
   })
 
 })
