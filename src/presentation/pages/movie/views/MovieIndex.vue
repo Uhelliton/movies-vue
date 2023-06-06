@@ -49,8 +49,20 @@ export default defineComponent({
           <legend>Milhões de Filmes, Séries e Pessoas para Descobrir. Explore já.</legend>
         </fieldset>
         <div class="flex items-center">
-          <input type="text" v-model="search" class="w-full rounded-lg border border-gray-400 p-2" placeholder="Buscar por um Filme, Série ou Pessoa..." />
-          <button type="button" @click="handleSearch" class="ml-2 rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-600">Pesquisar</button>
+          <input
+            type="text"
+            required
+            v-model="search"
+            class="w-full rounded-lg border border-gray-400 p-2"
+            placeholder="Buscar por um Filme, Série ou Pessoa..."
+          />
+          <button
+            type="button"
+            @click="handleSearch"
+            :disabled="!search.length"
+            class="ml-2 rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-600">
+            Pesquisar
+          </button>
         </div>
       </form>
     </div>
